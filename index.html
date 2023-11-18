@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Network Visualization</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+
+<body>
+    <div class="controls-container">
+        <form id="controlForm">
+            <div class="mb-4">
+                <label for="linkStrength">Link Strength:</label>
+                <input type="range" id="linkStrength" min="0.1" max="2" step="0.1" value="1">
+            </div>
+
+            <div class="mb-4">
+                <label for="collideForce">Collide Force:</label>
+                <input type="range" id="collideForce" min="0" max="1" step="0.1" value="0">
+            </div>
+
+            <div class="mb-4">
+                <label for="chargeForce">Charge Force:</label>
+                <input type="range" id="chargeForce" min="-200" max="10" step="10" value="-80">
+            </div>
+
+            <div class="mb-4">
+                <label>Node Size:</label>
+                <br>
+                <input type="radio" id="degree" name="nodeSize" value="degree" checked>
+                <label for="degree">Degree</label>
+                <br>
+                <input type="radio" id="pubCount" name="nodeSize" value="publications">
+                <label for="pubCount">Number of Publications</label>
+                <br>
+                <input type="radio" id="citationCount" name="nodeSize" value="citations">
+                <label for="citationCount">Number of Citations</label>
+            </div>
+
+            <button type="button" class="bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
+                onclick="applySettings()" style="margin-bottom: 10px;">Filter</button>
+            <button type="button"
+                class="bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full toggle-legend-btn"
+                onclick="toggleLegend()">Legend</button>
+
+        </form>
+    </div>
+
+    <div class="svg-container">
+        <svg width="1200" height="900"></svg>
+        <div id="tooltip"></div>
+    </div>
+
+    <div class="legend-table">
+        <table>
+            <!-- legend items [dynamicially added]  -->
+        </table>
+    </div>
+
+    <button type="button" class="def-zoom-btn" onclick="defaultZoom()">Default Zoom</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
